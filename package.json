@@ -4,13 +4,23 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest; exit 0",
+    "lint": "eslint .; exit 0",
     "start": "nodemon server/server.js"
   },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
   "main": "server/server.js",
   "dependencies": {
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
     "jest": "^27.4.3",
     "nodemon": "^2.0.15"
   },
