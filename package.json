@@ -1,0 +1,22 @@
+{
+  "name": "product-overview-api",
+  "description": "",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest; exit 0",
+    "start": "nodemon server/server.js"
+  },
+  "main": "server/server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jest": "^27.4.3",
+    "nodemon": "^2.0.15"
+  },
+  "jest": {
+    "verbose": true,
+    "rootDir": "test",
+    "watchman": true
+  }
+}
