@@ -124,3 +124,14 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# data
+data
+product.csv
+features.csv
+styles.csv
+photos.csv
+skus.csv
+
+# .DS_store
+.DS_store
