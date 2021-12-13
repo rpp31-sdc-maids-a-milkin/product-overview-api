@@ -6,26 +6,6 @@ jest.mock('pg', () => {
   return { Client }
 })
 
-function setupTest () {
-  const mocks = {}
-
-  mocks.client = {}
-  mocks.client.connect = jest.fn()
-  mocks.client.end = jest.fn()
-  mocks.client.query = jest.fn().mockImplementation((query) => {
-    return Promise.resolve(mocks.client.query[query])
-  })
-
-  mocks.pg = {}
-  mocks.pg.Client = jest.fn().mockImplementation(function Client (config) {
-    return mocks.client
-  })
-
-  jest.spyOn(pg, 'Client').mockImplementation(mocks.pg.Client)
-
-  return { mocks }
-}
-
 describe('db', () => {
   test('getProducts', async () => {
     const tester = setupTest()
@@ -46,3 +26,23 @@ describe('db', () => {
     expect(tester.mocks.client.end).toHaveBeenCalled()
   })
 })
+
+function setupTest () {
+  const mocks = {}
+
+  mocks.client = {}
+  mocks.client.connect = jest.fn()
+  mocks.client.end = jest.fn()
+  mocks.client.query = jest.fn().mockImplementation((query) => {
+    return Promise.resolve(mocks.client.query[query])
+  })
+
+  mocks.pg = {}
+  mocks.pg.Client = jest.fn().mockImplementation((config) => {
+    return mocks.client
+  })
+
+  jest.spyOn(pg, 'Client').mockImplementation(mocks.pg.Client)
+
+  return { mocks }
+}
