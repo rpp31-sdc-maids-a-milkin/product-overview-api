@@ -3,8 +3,8 @@
   "description": "",
   "version": "1.0.0",
   "scripts": {
-    "test": "jest; exit 0",
-    "lint": "eslint .; exit 0",
+    "test": "jest --detectOpenHandles",
+    "lint": "eslint .",
     "start": "nodemon server/server.js"
   },
   "pre-commit": [
@@ -13,7 +13,8 @@
   ],
   "main": "server/server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
