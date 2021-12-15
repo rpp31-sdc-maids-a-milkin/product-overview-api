@@ -10,6 +10,13 @@ parseCSV('products', products)
     attachProperty('features', products, attachFeatures)
   })
 
+parseCSV('styles', styles)
+  .then(() => {
+    attachProperty('photos', styles, attachPhotos)
+  })
+
+parseCSV('skus', skus)
+
 function parseCSV (file, storage) {
   return new Promise((resolve, reject) => {
     fs.createReadStream(`data/${file}.csv`)
@@ -69,8 +76,19 @@ function attachFeatures (row) {
   }
 }
 
-// get products into array
-// then add features to corresponding product objects
+function attachPhotos (row) {
+  const index = row.styleId
+  const style = styles[index]
+  const photo = {
+    url: row.url,
+    thumbnail_url: row.thumbnail_url
+  }
 
-// get styles into array
-// then add photos to corresponding style objects
+  if (!style.photos) {
+    style.default = true
+    style.photos = [photo]
+  } else {
+    style.default = false
+    style.photos.push(photo)
+  }
+}
