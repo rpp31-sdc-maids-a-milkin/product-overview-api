@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "lint": "eslint .",
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "etl": "node db/etl.js"
   },
   "pre-commit": [
     "lint",
