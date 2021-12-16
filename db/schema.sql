@@ -1,5 +1,3 @@
--- psql postgres root -h 127.0.0.1 -f -a db/schema.sql
-
 CREATE DATABASE atelier;
 
 \c atelier;
@@ -28,7 +26,7 @@ CREATE TABLE styles (
 CREATE TABLE skus (
   sku_id integer PRIMARY KEY,
   style_id integer,
-  sku_size varchar(5),
+  sku_size varchar(255),
   sku_quantity integer
 );
 

@@ -1,5 +1,5 @@
-const csv = require('csv-parse')
 const fs = require('fs')
+const csv = require('csv-parse')
 const csvWriter = require('csv-write-stream')
 
 const products = []
