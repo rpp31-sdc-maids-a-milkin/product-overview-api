@@ -22,7 +22,7 @@ CREATE TABLE style_info (
   style_name varchar(255),
   style_original_price money,
   style_sale_price money,
-  style_default boolean,
+  style_default integer,
   style_photos jsonb
 );
 
