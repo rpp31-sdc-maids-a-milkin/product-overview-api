@@ -5,7 +5,11 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "lint": "eslint .",
-    "start": "nodemon server/server.js"
+    "start": "nodemon server/server.js",
+    "etl": "node db/etl.js",
+    "schema": "psql postgres root -h 127.0.0.1 -f db/schema.sql -a",
+    "pg": "psql postgres -U root -d atelier"
+
   },
   "pre-commit": [
     "lint",
@@ -13,6 +17,8 @@
   ],
   "main": "server/server.js",
   "dependencies": {
+    "csv-parse": "^5.0.3",
+    "csv-write-stream": "^2.0.0",
     "express": "^4.17.1",
     "pg": "^8.7.1"
   },

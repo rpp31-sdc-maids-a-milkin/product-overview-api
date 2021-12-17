@@ -1,8 +1,8 @@
 const request = require('supertest')
-const app = require('../server/routes.js')
+const app = require('../server/endpoints.js')
 const db = require('../db/db.js')
 
-describe('routes: ', () => {
+describe('endpoints: ', () => {
   test('GET / should respond with a 200 code', async () => {
     const tester = setupTest()
     const response = await tester.route('/')
