@@ -9,7 +9,7 @@ jest.mock('pg', () => {
 describe('db', () => {
   test('getProducts', async () => {
     const tester = setupTest()
-    const query = 'SELECT * from product_info'
+    const query = 'select * from products limit 0'
     tester.mocks.client.query[query] = { rows: [] }
 
     expect(tester.mocks.pg.Client).not.toHaveBeenCalled()
