@@ -5,13 +5,13 @@ const db = require('../db/db.js')
 describe('endpoints: ', () => {
   test('GET / should respond with a 200 code', async () => {
     const tester = setupTest()
-    const response = await tester.route('/')
+    const response = await tester.route('/products')
     expect(response.statusCode).toBe(200)
   })
 
   test('TWO: GET / should respond with a 200 code', async () => {
     const tester = setupTest()
-    const response = await tester.route('/')
+    const response = await tester.route('/products')
     expect(response.statusCode).toBe(200)
   })
 })

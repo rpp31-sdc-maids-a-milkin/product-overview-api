@@ -132,6 +132,7 @@ features.csv
 styles.csv
 photos.csv
 skus.csv
+API_paths.txt
 
 # .DS_store
 .DS_store
