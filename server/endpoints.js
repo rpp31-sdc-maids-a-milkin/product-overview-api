@@ -4,7 +4,7 @@ const app = express()
 
 app.get('/products', async function (req, res) {
   try {
-    const result = await db.getProducts()
+    const result = await db.getProducts(req.query.page, req.query.count)
     res.status(200).send(result)
   } catch (error) {
     res.status(500).send({ error })
@@ -13,7 +13,7 @@ app.get('/products', async function (req, res) {
 
 app.get('/products/:productId', async function (req, res) {
   try {
-    const result = await db.getProduct()
+    const result = await db.getProduct(req.query.productId)
     res.status(200).send(result)
   } catch (error) {
     res.status(500).send({ error })
