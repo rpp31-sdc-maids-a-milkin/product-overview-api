@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest --detectOpenHandles",
+    "test:coverage": "jest --coverage",
     "lint": "eslint .",
     "start": "nodemon server/server.js",
     "etl": "node db/etl.js",
