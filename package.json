@@ -10,7 +10,6 @@
     "etl": "node db/etl.js",
     "schema": "psql postgres root -h 127.0.0.1 -f db/schema.sql -a",
     "pg": "psql postgres -U root -d atelier"
-
   },
   "pre-commit": [
     "lint",
@@ -18,6 +17,7 @@
   ],
   "main": "server/server.js",
   "dependencies": {
+    "axios": "^0.24.0",
     "csv-parse": "^5.0.3",
     "csv-write-stream": "^2.0.0",
     "express": "^4.17.1",
@@ -31,8 +31,7 @@
     "eslint-plugin-promise": "^5.2.0",
     "jest": "^27.4.3",
     "nodemon": "^2.0.15",
-    "pre-commit": "^1.2.2",
-    "supertest": "^6.1.6"
+    "pre-commit": "^1.2.2"
   },
   "jest": {
     "verbose": true,
