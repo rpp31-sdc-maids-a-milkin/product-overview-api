@@ -7,7 +7,7 @@ jest.mock('pg', () => {
   return { Client }
 })
 
-describe('Database API', () => {
+describe('Database API Methods', () => {
   describe('getProducts', () => {
     test('should have been called with the correct default query', async () => {
       const tester = setupTest()
