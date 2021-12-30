@@ -39,7 +39,7 @@ describe('Database API Methods', () => {
     test('should have been called with the correct default query', async () => {
       const tester = setupTest()
       const query = sql.product(1)
-      tester.mocks.client.query[query] = { rows: [] }
+      tester.mocks.client.query[query] = { rows: [{ product_id: 1 }] }
       await db.getProduct(1)
 
       expect(tester.mocks.client.query).toHaveBeenCalledWith(query)
@@ -48,7 +48,7 @@ describe('Database API Methods', () => {
     test('should have properly connected and disconnected from the database', async () => {
       const tester = setupTest()
       const query = sql.product(1)
-      tester.mocks.client.query[query] = { rows: [] }
+      tester.mocks.client.query[query] = { rows: [{ product_id: 1 }] }
 
       expect(tester.mocks.pg.Client).not.toHaveBeenCalled()
       expect(tester.mocks.client.connect).not.toHaveBeenCalled()

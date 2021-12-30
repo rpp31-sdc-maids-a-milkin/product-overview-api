@@ -16,7 +16,7 @@ describe('Endpoints', () => {
     test('should return 5 products by default starting at product 1', () => {
       axios.get('http://localhost:3001/products')
         .then((response) => {
-          expect(response.data[0].product_id).toBe(1)
+          expect(response.data[0].id).toBe(1)
           expect(response.data.length).toBe(5)
         })
     })
@@ -29,7 +29,7 @@ describe('Endpoints', () => {
         }
       })
         .then((response) => {
-          expect(response.data[0].product_id).toBe(21)
+          expect(response.data[0].id).toBe(21)
           expect(response.data.length).toBe(10)
         })
     })
@@ -43,7 +43,8 @@ describe('Endpoints', () => {
       })
         .then((response) => {
           const product = response.data[0]
-          expect(product).toHaveProperty('product_id')
+          expect(product).toHaveProperty('id')
+          expect(product).toHaveProperty('campus')
           expect(product).toHaveProperty('name')
           expect(product).toHaveProperty('slogan')
           expect(product).toHaveProperty('description')
@@ -87,7 +88,7 @@ describe('Endpoints', () => {
         .then((response) => {
           const product = response.data[0]
           const expectedId = parseInt(response.config.url.split('/')[4], 10)
-          expect(product.product_id).toBe(expectedId)
+          expect(product.id).toBe(expectedId)
         })
     })
 
@@ -95,7 +96,7 @@ describe('Endpoints', () => {
       axios.get(randomProductUrl)
         .then((response) => {
           const product = response.data[0]
-          expect(product).toHaveProperty('product_id')
+          expect(product).toHaveProperty('id')
           expect(product).toHaveProperty('name')
           expect(product).toHaveProperty('slogan')
           expect(product).toHaveProperty('description')
@@ -139,20 +140,22 @@ describe('Endpoints', () => {
 
     test('should return styles with the correct properties', async () => {
       const response = await axios.get('http://localhost:3001/products/885107/styles')
-      const styles = response.data
+      const product = response.data
+      const styles = product.results
 
       if (styles.length === 0) {
         expect(styles.length).toBe(0)
       } else {
+        expect(product).toHaveProperty('product_id')
+        expect(product).toHaveProperty('results')
         for (let i = 0; i < styles.length; i++) {
           const style = styles[i]
           expect(style).toHaveProperty('style_id')
-          expect(style).toHaveProperty('product_id')
           expect(style).toHaveProperty('name')
           expect(style).toHaveProperty('sale_price')
           expect(style).toHaveProperty('original_price')
-          expect(style).toHaveProperty('default_style')
           expect(style).toHaveProperty('photos')
+          expect(style).toHaveProperty('default?')
           expect(style).toHaveProperty('skus')
         }
       }
