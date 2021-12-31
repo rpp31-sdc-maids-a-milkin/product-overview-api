@@ -17,7 +17,7 @@ app.get('/products/:productId', async function (req, res) {
     if (result.length === 0) {
       res.status(500).send('Product does not exist')
     } else {
-      res.status(200).send(result)
+      res.status(200).send(result[0])
     }
   } catch (error) {
     res.status(500).send({ error })

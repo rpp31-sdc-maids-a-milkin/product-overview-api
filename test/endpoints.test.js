@@ -95,7 +95,7 @@ describe('Endpoints', () => {
     test('should return a product with the correct properties', () => {
       axios.get(randomProductUrl)
         .then((response) => {
-          const product = response.data[0]
+          const product = response.data
           expect(product).toHaveProperty('id')
           expect(product).toHaveProperty('name')
           expect(product).toHaveProperty('slogan')
