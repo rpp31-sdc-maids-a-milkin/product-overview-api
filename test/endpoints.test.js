@@ -76,17 +76,10 @@ describe('Endpoints', () => {
         })
     })
 
-    test('should return 1 product', () => {
-      axios.get(randomProductUrl)
-        .then((response) => {
-          expect(response.data.length).toBe(1)
-        })
-    })
-
     test('should return product matching input productId', () => {
       axios.get(randomProductUrl)
         .then((response) => {
-          const product = response.data[0]
+          const product = response.data
           const expectedId = parseInt(response.config.url.split('/')[4], 10)
           expect(product.id).toBe(expectedId)
         })
