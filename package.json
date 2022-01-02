@@ -5,6 +5,9 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "test:coverage": "jest --coverage",
+    "k6:product": "k6 run performance/product.js",
+    "k6:products": "k6 run performance/products.js",
+    "k6:styles": "k6 run performance/styles.js",
     "lint": "eslint .",
     "start": "nodemon server/server.js",
     "etl": "node db/etl.js",
@@ -12,8 +15,7 @@
     "pg": "psql postgres -U root -d atelier"
   },
   "pre-commit": [
-    "lint",
-    "test"
+    "lint"
   ],
   "main": "server/server.js",
   "dependencies": {
