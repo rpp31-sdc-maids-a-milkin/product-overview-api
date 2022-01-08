@@ -38,3 +38,7 @@ CREATE TABLE skus (
 -- append timestamp info to product table afterwards
 ALTER TABLE products ADD COLUMN created_at timestamp DEFAULT NOW();
 ALTER TABLE products ADD COLUMN updated_at timestamp DEFAULT NOW();
+
+-- create indexes on styles and skus tables
+CREATE INDEX prod_index ON styles (product_id);
+CREATE INDEX style_index ON skus (style_id);
