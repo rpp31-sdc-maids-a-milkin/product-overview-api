@@ -134,5 +134,8 @@ photos.csv
 skus.csv
 API_paths.txt
 
+# new relic
+newrelic.js
+
 # .DS_store
 .DS_store
