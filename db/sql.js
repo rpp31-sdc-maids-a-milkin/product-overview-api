@@ -10,8 +10,15 @@ const sql = {
     `
   },
   product: (productId) => { return `SELECT * FROM products WHERE product_id = ${productId}` },
-  styles: (productId) => { return `SELECT * FROM styles WHERE product_id = ${productId}` },
-  skus: (styleId) => { return `SELECT * FROM skus WHERE style_id = ${styleId}` }
+  styles: (productId) => {
+    return `
+      SELECT y.*, u.*
+      FROM styles AS y
+        LEFT JOIN skus AS u
+        ON y.style_id = u.style_id
+      WHERE y.product_id = ${productId}
+    `
+  }
 }
 
 module.exports = sql

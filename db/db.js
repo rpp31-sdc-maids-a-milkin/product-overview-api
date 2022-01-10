@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const { Client } = require('pg')
 const sql = require('./sql.js')
 
@@ -45,22 +46,38 @@ const getStyles = async (productId = 1) => {
 
   client.connect()
 
-  const styles = await client.query(sql.styles(productId))
-  for (let i = 0; i < styles.rows.length; i++) {
-    const style = styles.rows[i]
-    const styleId = style.style_id
-    const defStyle = style.default_style
-    style['default?'] = !!(defStyle)
+  const { rows } = await client.query(sql.styles(productId))
 
-    delete style.product_id
-    delete style.default_style
+  const styles = []
+  const addedStyles = {}
+  let styleIndex = 0
 
-    const skus = await client.query(sql.skus(styleId))
+  for (let i = 0; i < rows.length; i++) {
+    const sku = rows[i]
+    const { style_id, name, sale_price, original_price, default_style, photos, sku_id, size, quantity } = sku
 
-    style.skus = skus.rows
+    if (addedStyles[style_id] === undefined) {
+      addedStyles[style_id] = styleIndex
+      styleIndex++
+      styles.push(
+        {
+          style_id,
+          name,
+          original_price,
+          sale_price,
+          'default?': default_style,
+          photos,
+          skus: {}
+        }
+      )
+    }
+
+    const currStyleIndex = addedStyles[style_id]
+    styles[currStyleIndex].skus[sku_id] = { quantity, size }
   }
+
   client.end()
-  return { product_id: productId, results: styles.rows }
+  return { product_id: productId, results: styles }
 }
 
 module.exports = {
