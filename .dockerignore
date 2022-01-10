@@ -1,0 +1,4 @@
+data
+*/coverage
+newrelic*
+!node_modules
