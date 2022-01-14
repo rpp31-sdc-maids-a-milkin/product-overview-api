@@ -1,8 +1,6 @@
-FROM node:latest
-COPY . /product-overview-api
-# RUN make /product-overview-api
-WORKDIR /product-overview-api
-ENV NEW_RELIC_NO_CONFIG_FILE=true
+FROM node
+COPY . /sdc
+WORKDIR /sdc
 RUN npm install
 
 EXPOSE 3001
