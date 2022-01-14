@@ -1,9 +1,11 @@
 /* eslint-disable camelcase */
+require('dotenv').config()
 const { Client } = require('pg')
 const sql = require('./sql.js')
 
 // config string
-const connectionString = 'postgres://root:password@localhost:5432/atelier'
+const connectionString = process.env.POSTGRES_URL
+console.log(connectionString)
 
 /* DB API */
 const getProducts = async (page = 1, count = 5) => {

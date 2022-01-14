@@ -24,7 +24,7 @@ function writeProductInfo () {
         'features'
       ]
     })
-    productWriter.pipe(fs.createWriteStream('data/product_info.csv'))
+    productWriter.pipe(fs.createWriteStream('data/transformed/product_info.csv'))
 
     parseCSV('products', products)
       .then(() => {
@@ -62,7 +62,7 @@ function writeStyleInfo () {
         'photos'
       ]
     })
-    styleWriter.pipe(fs.createWriteStream('data/style_info.csv'))
+    styleWriter.pipe(fs.createWriteStream('data/transformed/style_info.csv'))
 
     parseCSV('styles', styles)
       .then(() => {
@@ -89,7 +89,7 @@ function writeStyleInfo () {
 function writeSkuInfo () {
   return new Promise((resolve, reject) => {
     const skuWriter = csvWriter({ headers: ['id', 'styleId', 'size', 'quantity'] })
-    skuWriter.pipe(fs.createWriteStream('data/sku_info.csv'))
+    skuWriter.pipe(fs.createWriteStream('data/transformed/sku_info.csv'))
 
     parseCSV('skus', skus)
       .then(() => {
