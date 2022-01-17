@@ -1,0 +1,14 @@
+FROM postgres
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=password
+ENV ATELIER_NAME=atelier
+ENV ATELIER_DUMP=dump.sql
+ENV ATELIER_DUMP_DIR=/tmp/dump
+
+EXPOSE 5432
+
+RUN mkdir -p $ATELIER_DUMP_DIR
+COPY $ATELIER_DUMP $ATELIER_DUMP_DIR
+WORKDIR $ATELIER_DUMP_DIR
+COPY init-atelier.sh /docker-entrypoint-initdb.d/
