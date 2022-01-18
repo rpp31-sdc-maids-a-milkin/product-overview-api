@@ -33,4 +33,13 @@ app.get('/products/:productId/styles', async function (req, res) {
   }
 })
 
+app.get('/loaderio-61e19fa9aa4f94252609c7d805c6479d', async function (req, res) {
+  try {
+    const token = 'loaderio-61e19fa9aa4f94252609c7d805c6479d'
+    res.status(200).send(token)
+  } catch (error) {
+    res.status(500).send({ error })
+  }
+})
+
 module.exports = app
