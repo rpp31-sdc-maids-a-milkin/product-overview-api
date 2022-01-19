@@ -1,18 +1,19 @@
 /* eslint-disable camelcase */
 require('dotenv').config()
-const { Client } = require('pg')
+const { Pool } = require('pg')
 const sql = require('./sql.js')
 
 // config string
 const connectionString = process.env.POSTGRES_URL
-console.log(connectionString)
+const max = 100
+
+const pool = new Pool({ connectionString, max })
 
 /* DB API */
 const getProducts = async (page = 1, count = 5) => {
-  const client = new Client({ connectionString })
-  client.connect()
-
+  const client = await pool.connect()
   const result = await client.query(sql.products(page, count))
+  client.release()
 
   // change product_id to id and add campus
   for (let i = 0; i < result.rows.length; i++) {
@@ -23,15 +24,14 @@ const getProducts = async (page = 1, count = 5) => {
     product.campus = 'hr-rpp'
   }
 
-  client.end()
   return result.rows
 }
 
 const getProduct = async (productId = 1) => {
-  const client = new Client({ connectionString })
-  client.connect()
-
+  const client = await pool.connect()
   const result = await client.query(sql.product(productId))
+  client.release()
+
   // change product_id to id and add campus
   const product = result.rows[0]
   const id = product.product_id
@@ -39,16 +39,13 @@ const getProduct = async (productId = 1) => {
   product.id = id
   product.campus = 'hr-rpp'
 
-  client.end()
   return result.rows
 }
 
 const getStyles = async (productId = 1) => {
-  const client = new Client({ connectionString })
-
-  client.connect()
-
+  const client = await pool.connect()
   const { rows } = await client.query(sql.styles(productId))
+  client.release()
 
   const styles = []
   const addedStyles = {}
@@ -78,7 +75,6 @@ const getStyles = async (productId = 1) => {
     styles[currStyleIndex].skus[sku_id] = { quantity, size }
   }
 
-  client.end()
   return { product_id: productId, results: styles }
 }
 
