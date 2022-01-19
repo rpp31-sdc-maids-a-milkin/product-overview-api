@@ -1,12 +1,12 @@
 const sql = {
   products: (page, count) => {
-    const offset = (page * count) - count
+    const offset = (page - 1) * count + 1
     return `
       SELECT product_id, name, slogan, description, category,
       default_price, created_at, updated_at
       FROM products
+      WHERE product_id >= ${offset}
       LIMIT ${count}
-      OFFSET ${offset}
     `
   },
   product: (productId) => { return `SELECT * FROM products WHERE product_id = ${productId}` },
